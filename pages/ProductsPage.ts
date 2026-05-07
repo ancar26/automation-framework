@@ -6,9 +6,17 @@ export class ProductsPage {
     async goto() {
         await this.page.goto('/');
         await this.page.waitForSelector('[data-test^="product-"]');
-
     }
     
+    async gotoProduct(productId: string) {
+        await this.page.goto(`/product/${productId}`)
+        await this.page.waitForSelector('[data-test="product-description"]');
+    }
+
+     getElement(dataTest: string) {
+       return this.page.locator(`[data-test='${dataTest}']`);
+    }
+
     async getProductsCount(): Promise<number> {
        return await this.page.locator('[data-test^="product-"]').count()
     }
@@ -33,11 +41,11 @@ export class ProductsPage {
         await this.page.getByLabel(categoryName).click();
     }
 
-    async selectFilterByBrand(){
-
-    }
-
     async getFilteredProducts(){
         await this.page.locator('[data-test="filter_completed"]').isVisible();
+    }
+
+    async clickButton(buttonIdentificator: string){
+        await this.page.locator(`[data-test="${buttonIdentificator}"]`).click();
     }
 }
