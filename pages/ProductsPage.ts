@@ -12,4 +12,24 @@ export class ProductsPage {
     async getProductsCount(): Promise<number> {
        return await this.page.locator('[data-test^="product-"]').count()
     }
+
+    async searchFor(queryString: string) {
+
+        await this.page.locator('[data-test="search-query"]').fill(queryString);
+        await Promise.all([
+          this.page.waitForResponse('**/products**'),
+          this.page.keyboard.press('Enter'),
+        ]);
+
+        // await this.page.locator('[data-test="search-query"]').fill(queryString)
+        // await this.page.keyboard.press('Enter')
+    }
+
+    async getSearchCaption(): Promise<string> {
+       return await this.page.locator('[data-test="search-caption"]').textContent() || '';
+    }
+
+    async getResultsCount(): Promise<string> {
+        return await this.page.locator('[data-testid="search-result-count"]').textContent() || "";
+    }
 }

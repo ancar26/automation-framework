@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch"
+    ]
+  },
+  "editor.quickSuggestions": {
+  "other": "on",
+  "comments": "on",
+  "strings": "on",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+}
