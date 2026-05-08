@@ -1,4 +1,5 @@
 import { test, expect } from '../../fixtures/index';
+import { ProductsPage } from '../../pages/ProductsPage';
 
 test.describe('products, search, filters', () => {
     test('search for a product that should exist', async ({ productsPage }) => {
@@ -27,6 +28,5 @@ test.describe('products, search, filters', () => {
         // check no actual results:
         const resultsCount = await productsPage.getResultsCount();
         expect(resultsCount).toContain('0');
-
     })
 })

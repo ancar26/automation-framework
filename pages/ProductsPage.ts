@@ -8,6 +8,7 @@ export class ProductsPage {
         await this.page.waitForSelector('[data-test^="product-"]');
     }
     
+    // this assumes every product has a description
     async gotoProduct(productId: string) {
         await this.page.goto(`/product/${productId}`)
         await this.page.waitForSelector('[data-test="product-description"]');
