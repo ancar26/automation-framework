@@ -19,7 +19,7 @@ test('open up a product and check elements', async ({ productsPage, request}) =>
     await expect(productsPage.getElement('add-to-compare')).toBeVisible();
     //etc
 })
-test('add product in card: checkout', async({productsPage, request,page}) => {
+test('add product in card and complete checkout', async({productsPage, request, page}) => {
     await productsPage.clickButton('add-to-cart');
     await expect(page.locator('.toast-container')).toBeVisible()
     await expect(page.locator('.toast-container')).toContainText(' Product added to shopping cart. ')
@@ -28,8 +28,12 @@ test('add product in card: checkout', async({productsPage, request,page}) => {
     // check product is added:
     await expect(productsPage.getElement('product-title')).toBeVisible();
 
-    // now i can add some API check to validate same product ID i was on got added in the cart
+    await productsPage.clickButton('proceed-1');
+    await productsPage.clickButton('proceed-2');
 
-    //  const responseProductAddedInCart = await request.get(`https://api.practicesoftwaretesting.com/carts/${cartItemId}`)
-    // expect(responseProductAddedInCart.status()).toBe(200);
+    await page.locator('[data-test="country"]').selectOption('AL')
+
+    await productsPage.fillInputField('postal_code', '2aB');
+    await productsPage.fillInputField('house_number', '12B');
+    await productsPage.clickButton('proceed-3');
  })

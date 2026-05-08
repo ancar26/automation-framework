@@ -48,4 +48,8 @@ export class ProductsPage {
     async clickButton(buttonIdentificator: string){
         await this.page.locator(`[data-test="${buttonIdentificator}"]`).click();
     }
+
+    async fillInputField(dataTest: string, someText: string) {
+       return await this.page.locator(`[data-test='${dataTest}']`).fill(someText)
+    }
 }
